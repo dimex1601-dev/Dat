@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Connect Dating App</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f7f7f7;
+    min-height:100vh;
+}
+
+.header{
+    height:65px;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-bottom:1px solid #eee;
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+    color:#e91e63;
+}
+
+.app{
+    max-width:500px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 8px 30px rgba(0,0,0,0.12);
+}
+
+.photo{
+    height:430px;
+    background:linear-gradient(
+        135deg,
+        #ffd1dc,
+        #ff8fab
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:130px;
+}
+
+.details{
+    padding:22px;
+}
+
+.name{
+    font-size:28px;
+    font-weight:bold;
+    color:#222;
+}
+
+.location{
+    margin-top:8px;
+    color:#777;
+    font-size:15px;
+}
+
+.bio{
+    margin-top:15px;
+    color:#555;
+    font-size:16px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:25px;
+}
+
+.action{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    border:1px solid #ddd;
+    background:white;
+    font-size:28px;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.action:hover{
+    transform:scale(1.08);
+}
+
+.dislike{
+    color:#555;
+}
+
+.like{
+    color:#e91e63;
+}
+
+.chat{
+    color:#4267b2;
+}
+
+.message{
+    text-align:center;
+    margin-top:15px;
+    color:#777;
+    min-height:25px;
+}
+
+.no-profile{
+    text-align:center;
+    padding:80px 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">♥ CONNECT</div>
+</div>
+
+<div class="app">
+
+    <div class="card" id="profileCard">
+
+        <div class="photo" id="photo">
+            👩🏻
+        </div>
+
+        <div class="details">
+
+            <div class="name" id="name">
+                Ananya, 24
+            </div>
+
+            <div class="location" id="location">
+                📍 Chennai
+            </div>
+
+            <div class="bio" id="bio">
+                Coffee • Travel • Music
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="buttons">
+
+        <button
+            class="action dislike"
+            onclick="dislike()">
+            ❌
+        </button>
+
+        <button
+            class="action like"
+            onclick="like()">
+            ❤️
+        </button>
+
+        <button
+            class="action chat"
+            onclick="chat()">
+            💬
+        </button>
+
+    </div>
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+</div>
+
+
+<script>
+
+const profiles = [
+
+    {
+        name:"Ananya",
+        age:24,
+        city:"Chennai",
+        bio:"Coffee • Travel • Music",
+        photo:"👩🏻"
+    },
+
+    {
+        name:"Priya",
+        age:26,
+        city:"Coimbatore",
+        bio:"Movies • Food • Travel",
+        photo:"👩🏽"
+    },
+
+    {
+        name:"Meera",
+        age:23,
+        city:"Salem",
+        bio:"Nature • Books • Photography",
+        photo:"👩🏻‍🦰"
+    },
+
+    {
+        name:"Divya",
+        age:27,
+        city:"Bengaluru",
+        bio:"Fitness • Music • Trips",
+        photo:"👩🏾"
+    }
+
+];
+
+let current = 0;
+
+
+function showProfile(){
+
+    if(current >= profiles.length){
+
+        document.getElementById("profileCard").innerHTML = `
+
+            <div class="no-profile">
+
+                <h2>No More Profiles</h2>
+
+                <p style="margin-top:15px;color:#777;">
+                    Please check again later.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    const profile = profiles[current];
+
+    document.getElementById("photo").innerText =
+        profile.photo;
+
+    document.getElementById("name").innerText =
+        profile.name + ", " + profile.age;
+
+    document.getElementById("location").innerText =
+        "📍 " + profile.city;
+
+    document.getElementById("bio").innerText =
+        profile.bio;
+
+}
+
+
+function dislike(){
+
+    document.getElementById("message").innerText =
+        "Profile skipped";
+
+    current++;
+
+    setTimeout(function(){
+
+        showProfile();
+
+        document.getElementById("message").innerText = "";
+
+    },500);
+
+}
+
+
+function like(){
+
+    document.getElementById("message").innerText =
+        "❤️ You liked " + profiles[current].name;
+
+    current++;
+
+    setTimeout(function(){
+
+        showProfile();
+
+    },700);
+
+}
+
+
+function chat(){
+
+    document.getElementById("message").innerText =
+        "💬 Chat will be available after a Match.";
+
+}
+
+
+showProfile();
+
+</script>
+
+</body>
+</html>
